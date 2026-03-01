@@ -64,7 +64,7 @@ const ValoresHorarios = () => (
             <tbody>
               {[
                 ["Segunda a Sexta", "08:00 – 18:00"],
-                ["Sábado", "08:00 – 12:00"],
+                ["Sábado", "Fechado"],
                 ["Domingo", "Fechado"],
               ].map(([day, hours], i) => (
                 <tr key={i} className="border-b border-border last:border-0">
