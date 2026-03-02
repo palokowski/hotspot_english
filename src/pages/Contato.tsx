@@ -11,11 +11,33 @@ const fadeUp = {
 
 const Contato = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Placeholder: integrate with Formspree by setting form action to https://formspree.io/f/xgoljark
-    setSubmitted(true);
+    setSubmitting(true);
+    setError(false);
+
+    const formData = new FormData(e.currentTarget);
+    try {
+      const response = await fetch("https://formspree.io/f/xgoljark", {
+        method: "POST",
+        body: formData,
+        headers: {
+            Accept: "application/json",
+        },
+      });
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch (err) {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -137,11 +159,15 @@ const Contato = () => {
                   <input id="lgpd" name="lgpd" type="checkbox" required className="mt-1 h-4 w-4 rounded border-input accent-primary" />
                   <label htmlFor="lgpd" className="text-xs text-muted-foreground">Concordo em ser contatado(a) pela Hotspot English School. *</label>
                 </div>
+
+                {error && <p className="text-destructive text-sm font-medium">Ocorreu um erro ao enviar a mensagem. Tente novamente.</p>}
+
                 <button
                   type="submit"
-                  className="w-full rounded-xl bg-primary px-6 py-3 text-base font-bold text-primary-foreground shadow-md transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-primary"
+                  disabled={submitting}
+                  className="w-full rounded-xl bg-primary px-6 py-3 text-base font-bold text-primary-foreground shadow-md transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-primary disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Enviar mensagem
+                  {submitting ? "Enviando..." : "Enviar mensagem"}
                 </button>
               </form>
             )}
