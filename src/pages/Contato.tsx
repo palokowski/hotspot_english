@@ -56,7 +56,7 @@ const Contato = () => {
                 <Mail className="h-5 w-5 shrink-0 text-primary mt-0.5" />
                 <div>
                   <p className="font-bold text-sm">E-mail</p>
-                  <p className="text-sm text-muted-foreground">contato@hotspotenglish.com.br</p>
+                  <p className="text-sm text-muted-foreground">hotspot.english@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
