@@ -14,7 +14,7 @@ const Contato = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Placeholder: integrate with Formspree by setting form action to https://formspree.io/f/xlgwyjpr
+    // Placeholder: integrate with Formspree by setting form action to https://formspree.io/f/xgoljark
     setSubmitted(true);
   };
 
