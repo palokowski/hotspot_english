@@ -11,8 +11,10 @@ import { Card, CardContent } from "@/components/ui/card";
 interface InstagramPost {
   id: string;
   media_url: string;
+  media_type: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
   permalink: string;
   caption?: string;
+  thumbnail_url?: string;
 }
 
 const InstagramCarousel = () => {
@@ -40,7 +42,7 @@ const InstagramCarousel = () => {
 
         // Fetch from Instagram Graph API
         const response = await fetch(
-          `https://graph.instagram.com/me/media?fields=id,media_url,permalink,caption&access_token=${accessToken}`
+          `https://graph.instagram.com/me/media?fields=id,media_url,media_type,permalink,caption,thumbnail_url&access_token=${accessToken}`
         );
         const data = await response.json();
         if (data.error) {
@@ -94,12 +96,29 @@ const InstagramCarousel = () => {
             <div className="p-1">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <a href={post.permalink} target="_blank" rel="noopener noreferrer">
-                    <img
-                      src={post.media_url}
-                      alt={post.caption || "Instagram post"}
-                      className="w-full h-full object-cover rounded-lg"
-                    />
+                  <a href={post.permalink} target="_blank" rel="noopener noreferrer" className="relative block w-full h-full">
+                    {post.media_type === 'VIDEO' ? (
+                      <>
+                        <img
+                          src={post.thumbnail_url || post.media_url}
+                          alt={post.caption || "Instagram video"}
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-lg">
+                          <div className="bg-white bg-opacity-80 rounded-full p-3">
+                            <svg className="w-8 h-8 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <img
+                        src={post.media_url}
+                        alt={post.caption || "Instagram post"}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    )}
                   </a>
                 </CardContent>
               </Card>
