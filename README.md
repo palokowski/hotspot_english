@@ -4,6 +4,30 @@
 
 **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
+## Instagram Photos Sync Setup
+
+To sync your Instagram photos to the carousel on the homepage:
+
+1. **Create a Facebook Developer App**:
+   - Go to [Facebook Developers](https://developers.facebook.com/)
+   - Create a new app or use an existing one
+   - Add the "Instagram Basic Display" product to your app
+
+2. **Connect your Instagram Account**:
+   - In the Instagram Basic Display settings, click "Create New App"
+   - Follow the steps to connect your Instagram account
+   - Generate an access token
+
+3. **Add the Access Token to Environment**:
+   - Open the `.env` file in the project root
+   - Add your access token: `VITE_INSTAGRAM_ACCESS_TOKEN=your_access_token_here`
+   - Restart the development server
+
+4. **Notes**:
+   - The carousel will show placeholder images if no access token is provided
+   - Only public posts will be displayed
+   - The app fetches the latest 10 posts from your Instagram account
+
 ## How can I edit this code?
 
 There are several ways of editing your application.

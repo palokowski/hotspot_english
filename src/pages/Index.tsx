@@ -5,6 +5,7 @@ import { useState } from "react";
 import { WHATSAPP_LINK } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/Header";
 import heroImage from "@/assets/hero-image.jpg";
+import InstagramCarousel from "@/components/InstagramCarousel";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -148,6 +149,21 @@ const Index = () => {
               </motion.blockquote>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Instagram Photos */}
+      <section className="section-cool py-16 md:py-24" aria-labelledby="instagram-title">
+        <div className="container text-center">
+          <motion.h2 id="instagram-title" className="text-2xl font-extrabold md:text-4xl" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={0}>
+            Nosso dia a dia no Instagram
+          </motion.h2>
+          <motion.p className="mx-auto mt-4 max-w-lg text-muted-foreground" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
+            Veja fotos das nossas aulas, atividades e momentos especiais com os alunos.
+          </motion.p>
+          <motion.div className="mt-10" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={2}>
+            <InstagramCarousel />
+          </motion.div>
         </div>
       </section>
 
