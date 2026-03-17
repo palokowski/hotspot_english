@@ -147,50 +147,43 @@ const InstagramCarousel = () => {
           <CarouselItem key={post.id} className="md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
               <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  {post.media_type === 'VIDEO' ? (
-                    <div className="relative w-full h-full cursor-pointer" onClick={() => handleVideoClick(index)}>
-                      {index === currentIndex ? (
-                        <video
-                          ref={(el) => (videoRefs.current[index] = el)}
-                          src={post.media_url}
-                          className="w-full h-full object-cover rounded-lg"
-                          muted
-                          loop
-                          playsInline
-                          poster={post.thumbnail_url}
-                        />
-                      ) : (
-                        <>
+                <CardContent className="flex items-center justify-center p-6">
+                  <div className="w-full h-64 relative">
+                    {post.media_type === 'VIDEO' ? (
+                      <div className="relative w-full h-full cursor-pointer" onClick={() => handleVideoClick(index)}>
+                        {index === currentIndex ? (
+                          <video
+                            ref={(el) => (videoRefs.current[index] = el)}
+                            src={post.media_url}
+                            className="w-full h-full object-cover rounded-lg"
+                            muted
+                            loop
+                            playsInline
+                            poster={post.thumbnail_url}
+                          />
+                        ) : (
                           <img
                             src={post.thumbnail_url || post.media_url}
                             alt={post.caption || "Instagram video"}
                             className="w-full h-full object-cover rounded-lg"
                           />
-                          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 rounded-lg">
-                            <div className="bg-white bg-opacity-80 rounded-full p-3">
-                              <svg className="w-8 h-8 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                              </svg>
-                            </div>
+                        )}
+                        {index === currentIndex && (
+                          <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                            Click to unmute
                           </div>
-                        </>
-                      )}
-                      {index === currentIndex && (
-                        <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                          Click to unmute
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <a href={post.permalink} target="_blank" rel="noopener noreferrer">
-                      <img
-                        src={post.media_url}
-                        alt={post.caption || "Instagram post"}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    </a>
-                  )}
+                        )}
+                      </div>
+                    ) : (
+                      <a href={post.permalink} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                        <img
+                          src={post.media_url}
+                          alt={post.caption || "Instagram post"}
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      </a>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             </div>
